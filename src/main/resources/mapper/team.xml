@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.red.domain.team.TeamDao">
+
+	<insert id="insert">
+		INSERT INTO team(NAME, stadiumId, createdAt)
+		VALUES(#{name}, #{stadiumId}, NOW())
+	</insert>
+
+	<select id="findAll"
+		resultType="site.metacoding.red.domain.team.Team">
+		SELECT t.id, s.name stadiumName, row_number() over(order BY
+		t.id asc) as
+		NO, t.NAME, t.createdAt
+		FROM team t
+		INNER JOIN stadium s
+		ON
+		t.stadiumId = s.id
+	</select>
+
+	<select id="findById"
+		resultType="site.metacoding.red.domain.stadium.Stadium">
+
+	</select>
+
+	<insert id="update">
+
+	</insert>
+
+	<delete id="deleteById">
+		DELETE FROM team WHERE id = #{id};
+	</delete>
+
+
+</mapper>
